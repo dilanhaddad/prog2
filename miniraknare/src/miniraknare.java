@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class miniraknare extends Application {
 
+    //skapar för att kunna använda senare
     TextField inputField;
     ArrayList<Button> numpad;
     Button clear;
@@ -24,18 +25,28 @@ public class miniraknare extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Kalkulatorn");
 
+        //tar in alla saker för miniräknarens design
         initField();
 
+        //gör så att man inte kan skriva i textfield
+        inputField.setEditable(false);
+
+        //tar in andra deisgn saker och lägger till så att man trycka in knappar i textfield
         displayLayout.getChildren().add(inputField);
 
+        //initierar populatenumpad
         populateNumpad();
+
+        //initierar displaynumpadbuttons
         displayNunmpadButtons();
 
+        //placerar saker i miniräknaren
         mainLayout.setTop(displayLayout);
         mainLayout.setCenter(numpadLayout);
         mainLayout.setBottom(utilContainer);
 
-        Scene scene = new Scene(mainLayout, 300, 250);
+        //skapar en window med en viss storlek
+        Scene scene = new Scene(mainLayout, 200, 275);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -51,9 +62,9 @@ public class miniraknare extends Application {
 
     private void displayNunmpadButtons() {
         int buttonIndex = 0;
-        for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
-            for (int columnIndex = 0; columnIndex < 4; columnIndex++) {
-                numpadLayout.add(numpad.get(buttonIndex), columnIndex, rowIndex);
+        for (int rowIndex = 0; rowIndex < 5; rowIndex++) { //hur många horisontella rader som ska finnas
+            for (int columnIndex = 0; columnIndex < 4; columnIndex++) {//hur många vertikala rader som ska finnas
+                numpadLayout.add(numpad.get(buttonIndex), columnIndex, rowIndex); //lägger till raderna
                 buttonIndex++;
                 if (buttonIndex == numpad.size())
                     break;
@@ -62,8 +73,11 @@ public class miniraknare extends Application {
     }
 
     private void populateNumpad() {
-        char[] numpadKeys = new char[]{'1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', ',', '0', '=','/'};
 
+        //en char för vilka knappar som ska finnas
+        char[] numpadKeys = new char[]{'1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', ',', '0', '=','/',};
+
+        //en loop för att ska knapparna
         for (char key : numpadKeys) {
             String keyText = key + "";
             Button tempButton = new Button(keyText);
@@ -71,18 +85,22 @@ public class miniraknare extends Application {
             tempButton.setOnAction(event -> {
                 inputField.textProperty().set(inputField.textProperty().get() + keyText);
                 });
-         numpad.add(tempButton);
-            tempButton.setMinWidth(40);
-            tempButton.setMinHeight(40);
+         numpad.add(tempButton); //lägger till knapperna i designen
+
+            //storlek på knapparna
+            tempButton.setMinWidth(50);
+            tempButton.setMinHeight(50);
 
             };
 
+        //skapar en clear knapp (C)
         clear = new Button("C");
         clear.setOnAction(event -> {inputField.clear();});
 
+        //lägger till knappen och sätter storlek
         numpad.add(clear);
-        clear.setMinWidth(40);
-        clear.setMinHeight(40);
+        clear.setMinWidth(50);
+        clear.setMinHeight(50);
     }
 
 
@@ -94,7 +112,7 @@ public class miniraknare extends Application {
 
             String number = "";
             for (int i = 0; 1 < arr.length; i++) {
-                if (isNumeric(arr[i])) {
+                if (Numbers(arr[i])) {
                     number += arr[i];
                 } else {
                     if(number.equals("") && arr[i].equals("-")){
@@ -111,9 +129,9 @@ public class miniraknare extends Application {
             int tal1 = 0;
             for (int i = 0; i < list.size(); i++) {
 
-                if (i % 2 == 0) {
+                if (i % 2 == 0) { //om input (tal1) har modelus så vet programmet att det är en dator
                     tal1 = Integer.parseInt(list.get(1));
-                } else {
+                } else { //en loop för + - * / och =
                     if (list.get(i).equals("+")) {
                         tal1 = tal1 + Integer.parseInt(list.get(i + 1));
                     }
@@ -134,8 +152,8 @@ public class miniraknare extends Application {
             }
             System.out.println(tal1);
         }
-
-            public static Boolean isNumeric (String s){
+            //Metod som tittar on input är ett nummer eller tecken
+            public static Boolean Numbers(String s){
                 if("1234567890".contains(s)){
                     return true;
                 }
