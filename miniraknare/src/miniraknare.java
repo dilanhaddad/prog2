@@ -132,6 +132,7 @@ public class miniraknare extends Application {
                 if (i % 2 == 0) { //om input (tal1) har modelus så vet programmet att det är en dator
                     tal1 = Integer.parseInt(list.get(1));
                 } else { //en loop för + - * / och =
+                    // Om input är en av dessa tecken så änvänds denna funktion så att miniräknaren räknar med tecknet
                     if (list.get(i).equals("+")) {
                         tal1 = tal1 + Integer.parseInt(list.get(i + 1));
                     }
@@ -144,8 +145,8 @@ public class miniraknare extends Application {
                     if (list.get(i).equals("/")) {
                         tal1 = tal1 / Integer.parseInt(list.get(i + 1));
                     }
-                    if (list.get(i).equals(("="))){
-                        
+                    if (list.get(i).equals(("="))){ //Funktion så att man kan räkna ut men den är ej färdig och ska fixas
+
                     }
                     i++;
                 }
