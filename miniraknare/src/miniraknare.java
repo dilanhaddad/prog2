@@ -144,9 +144,9 @@ public class miniraknare extends Application {
                     if (list.get(i).equals("/")) {
                         tal1 = tal1 / Integer.parseInt(list.get(i + 1));
                     }
-                    //if (list.contains("=")){
-                      //  String[]
-                   // }
+                    if (list.get(i).equals(("="))){
+                        
+                    }
                     i++;
                 }
             }
